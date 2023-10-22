@@ -33,6 +33,7 @@ export default function Calculator() {
 
       if (evalResult === Infinity || evalResult === -Infinity) {
         setResult('Erreur: Division par zéro !');
+        setIsCalculationActive(false);
       } else {
         setResult(evalResult);
         setIsOverNineThousand(evalResult > 9000);
