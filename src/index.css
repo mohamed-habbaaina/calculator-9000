@@ -87,6 +87,11 @@ button:hover {
   width: 20%; /* Ajuster la largeur de la zone de boutons d'opération */
 }
 
+.over-nine-thousand{
+  font-size: 28px;
+  color: rgb(242, 91, 15);
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .calculator {
