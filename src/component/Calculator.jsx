@@ -3,13 +3,13 @@ import NumberButton from './NumberButton';
 import OperatorButton from './OperatorButton';
 import EqualButton from './EqualButton';
 import BeautifulScreen from './BeautifulScreen';
-import ItSOverNineThousand from './ItSOverNineThousand'; // Importez le composant
+import ItSOverNineThousand from './ItSOverNineThousand';
 
 export default function Calculator() {
   const [displayValue, setDisplayValue] = useState('0');
   const [calculation, setCalculation] = useState('');
   const [result, setResult] = useState('');
-  const [isOverNineThousand, setIsOverNineThousand] = useState(false); // État de visibilité
+  const [isOverNineThousand, setIsOverNineThousand] = useState(false);
 
   const handleNumberClick = (number) => {
     setDisplayValue(displayValue === '0' ? number : displayValue + number);
@@ -20,15 +20,20 @@ export default function Calculator() {
     setCalculation(calculation + ' ' + operator + ' ');
     setDisplayValue('0');
   };
-
+  
   const handleEquals = () => {
     try {
       const evalResult = eval(calculation);
-      setResult(evalResult);
-      setIsOverNineThousand(evalResult > 9000); // Mettre à jour l'état de visibilité
+
+      if (evalResult === Infinity || evalResult === -Infinity) {
+        setResult('Erreur; Division par zéro !');
+      } else {
+        setResult(evalResult);
+        setIsOverNineThousand(evalResult > 9000);
+      }
     } catch (error) {
       setResult('Erreur');
-      setIsOverNineThousand(false); // Réinitialiser la visibilité en cas d'erreur
+      setIsOverNineThousand(false);
     }
   };
 
@@ -50,7 +55,6 @@ export default function Calculator() {
       </div>
       <EqualButton onClick={handleEquals} className="equal-button" />
       
-      {/* Utilisez le composant ItSOverNineThousand avec l'état de visibilité */}
       {result > 9000 && <ItSOverNineThousand />}
     </div>
   );
