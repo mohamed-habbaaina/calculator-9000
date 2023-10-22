@@ -10,10 +10,16 @@ export default function Calculator() {
   const [calculation, setCalculation] = useState('');
   const [result, setResult] = useState('');
   const [isOverNineThousand, setIsOverNineThousand] = useState(false);
+  const [isCalculationActive, setIsCalculationActive] = useState(false);
 
   const handleNumberClick = (number) => {
+    if (!isCalculationActive) {
+      setCalculation(number.toString());
+      setIsCalculationActive(true);
+    } else {
+      setCalculation(calculation + number.toString());
+    }
     setDisplayValue(displayValue === '0' ? number : displayValue + number);
-    setCalculation(calculation + number);
   };
 
   const handleOperatorClick = (operator) => {
@@ -26,14 +32,16 @@ export default function Calculator() {
       const evalResult = eval(calculation);
 
       if (evalResult === Infinity || evalResult === -Infinity) {
-        setResult('Erreur; Division par zéro !');
+        setResult('Erreur: Division par zéro !');
       } else {
         setResult(evalResult);
         setIsOverNineThousand(evalResult > 9000);
+        setIsCalculationActive(false);
       }
     } catch (error) {
       setResult('Erreur');
       setIsOverNineThousand(false);
+      setIsCalculationActive(false);
     }
   };
 
