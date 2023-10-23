@@ -13,10 +13,14 @@ cd calculator-react
 
 # Install the dependencies by running the following command:
 npm install
+or
+yarn
 
 # Usage
 To launch the application in development mode, run the following command:
 npm run dev
+or
+yarn run dev
 
 The application will be accessible in your browser at http://localhost:3000. You can perform simple calculations by clicking on numbers and operators and then pressing the "Equal" button.
 
